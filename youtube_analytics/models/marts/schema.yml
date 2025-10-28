@@ -1,0 +1,133 @@
+version: 2
+
+models:
+  - name: fct_trending_videos
+    description: "Fact table containing all trending video events with metrics"
+    columns:
+      - name: trending_video_key
+        description: "Surrogate key for trending video event"
+        tests:
+          - unique
+          - not_null
+      - name: video_id
+        description: "YouTube video identifier"
+        tests:
+          - not_null
+      - name: views
+        description: "Number of views"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: likes
+        description: "Number of likes"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: engagement_rate
+        description: "Engagement rate calculation"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: dim_channels
+    description: "Dimension table for YouTube channels with aggregated metrics"
+    columns:
+      - name: channel_key
+        description: "Surrogate key for channel"
+        tests:
+          - unique
+          - not_null
+      - name: channel_title
+        description: "Channel name"
+        tests:
+          - unique
+          - not_null
+      - name: total_videos
+        description: "Total number of trending videos"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: channel_tier
+        description: "Performance tier classification"
+        tests:
+          - accepted_values:
+              values: ['Top Tier', 'High Performer', 'Mid Performer', 'Growing']
+
+  - name: dim_categories
+    description: "Dimension table for video categories by country"
+    columns:
+      - name: category_key
+        description: "Surrogate key for category-country combination"
+        tests:
+          - unique
+          - not_null
+      - name: category_name
+        description: "Category name"
+        tests:
+          - not_null
+      - name: country_code
+        description: "Country code"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['CA', 'DE', 'FR', 'GB', 'IN', 'JP', 'KR', 'MX', 'RU', 'US']
+
+  - name: mart_daily_trends
+    description: "Daily aggregated trending metrics by country"
+    columns:
+      - name: daily_trend_key
+        description: "Surrogate key for daily trend"
+        tests:
+          - unique
+          - not_null
+      - name: trending_date
+        description: "Date of trending"
+        tests:
+          - not_null
+      - name: country_code
+        description: "Country code"
+        tests:
+          - not_null
+      - name: videos_trending
+        description: "Number of videos trending on this day"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+  - name: mart_category_performance
+    description: "Category performance metrics and rankings"
+    columns:
+      - name: category_perf_key
+        description: "Surrogate key for category performance"
+        tests:
+          - unique
+          - not_null
+      - name: category_name
+        description: "Category name"
+        tests:
+          - not_null
+      - name: overall_performance_score
+        description: "Weighted performance score"
+        tests:
+          - not_null
+
+  - name: mart_channel_rankings
+    description: "Channel rankings and performance across countries"
+    columns:
+      - name: channel_ranking_key
+        description: "Surrogate key for channel ranking"
+        tests:
+          - unique
+          - not_null
+      - name: channel_title
+        description: "Channel name"
+        tests:
+          - not_null
+      - name: channel_size_tier
+        description: "Channel size classification"
+        tests:
+          - accepted_values:
+              values: ['Mega', 'Large', 'Medium', 'Small', 'Micro']

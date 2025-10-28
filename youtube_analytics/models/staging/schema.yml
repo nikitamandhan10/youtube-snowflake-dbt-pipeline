@@ -1,0 +1,57 @@
+version: 2
+
+sources:
+  - name: raw
+    database: YOUTUBE_DB
+    schema: RAW
+    tables:
+      - name: raw_youtube_videos
+        description: "Raw YouTube trending videos data from S3"
+        columns:
+          - name: video_id
+            description: "Unique identifier for the video"
+            tests:
+              - not_null
+          - name: country_code
+            description: "Country code where video trended"
+            tests:
+              - not_null
+              
+      - name: raw_categories
+        description: "Raw category mapping data from JSON files"
+        columns:
+          - name: country_code
+            description: "Country code for categories"
+            tests:
+              - not_null
+
+models:
+  - name: stg_youtube_videos
+    description: "Cleaned and standardized YouTube videos data"
+    columns:
+      - name: video_id
+        description: "Unique video identifier"
+        tests:
+          - not_null
+      - name: trending_date
+        description: "Date when video was trending"
+        tests:
+          - not_null
+      - name: views
+        description: "Number of views"
+        tests:
+          - not_null
+      - name: engagement_rate
+        description: "Calculated engagement rate (likes + dislikes) / views"
+        
+  - name: stg_categories
+    description: "Cleaned category reference data"
+    columns:
+      - name: category_id
+        description: "Unique category identifier"
+        tests:
+          - not_null
+      - name: category_name
+        description: "Category name"
+        tests:
+          - not_null

@@ -1,0 +1,47 @@
+[0m12:40:09.583150 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1085925e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b0f4280>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b0f45b0>]}
+
+
+============================== 12:40:09.586577 | b091447c-9b3f-4689-995a-d3c6a88bf11c ==============================
+[0m12:40:09.586577 [info ] [MainThread]: Running with dbt=1.11.0-b3
+[0m12:40:09.586816 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'log_path': 'logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'use_colors': 'True', 'printer_width': '80', 'use_experimental_parser': 'False', 'target_path': 'None', 'introspect': 'True', 'write_json': 'True', 'indirect_selection': 'eager', 'version_check': 'True', 'log_format': 'default', 'static_parser': 'True', 'empty': 'None', 'debug': 'False', 'log_cache_events': 'False', 'partial_parse': 'True', 'invocation_command': 'dbt init youtube_analytics', 'profiles_dir': '/Users/nikita/.dbt', 'no_print': 'None', 'send_anonymous_usage_stats': 'True'}
+[0m12:40:09.592796 [info ] [MainThread]: Creating dbt configuration folder at /Users/nikita/.dbt
+[0m12:40:09.593605 [debug] [MainThread]: Starter project path: /Users/nikita/Desktop/youtube-dbt-snowflake/venv/lib/python3.9/site-packages/dbt/include/starter_project
+[0m12:40:09.598146 [info ] [MainThread]: 
+Your new dbt project "youtube_analytics" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:40:09.598359 [info ] [MainThread]: Setting up your profile.
+[0m12:44:10.884829 [info ] [MainThread]: Profile youtube_analytics written to /Users/nikita/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m12:44:10.893331 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 241.34445, "process_in_blocks": "0", "process_kernel_time": 0.162485, "process_mem_max_rss": "123240448", "process_out_blocks": "0", "process_user_time": 0.827992}
+[0m12:44:10.895229 [debug] [MainThread]: Command `dbt init` succeeded at 12:44:10.894754 after 241.35 seconds
+[0m12:44:10.897215 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1085925e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b183340>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b0f4280>]}
+[0m12:44:10.898408 [debug] [MainThread]: Flushing usage events
+[0m12:44:11.587036 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:13:58.723640 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105e934c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106f30220>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106f30550>]}
+
+
+============================== 15:13:58.725892 | c2d6e119-6670-4ae2-8d31-3aa432024a51 ==============================
+[0m15:13:58.725892 [info ] [MainThread]: Running with dbt=1.11.0-b3
+[0m15:13:58.726166 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'fail_fast': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'write_json': 'True', 'invocation_command': 'dbt run --select marts', 'log_format': 'default', 'cache_selected_only': 'False', 'log_path': 'logs', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'introspect': 'True', 'no_print': 'None', 'use_experimental_parser': 'False', 'target_path': 'None', 'warn_error': 'None', 'log_cache_events': 'False', 'use_colors': 'True', 'partial_parse': 'True', 'debug': 'False', 'quiet': 'False', 'profiles_dir': '/Users/nikita/.dbt', 'empty': 'False'}
+[0m15:13:58.726441 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/nikita/Desktop/youtube-dbt-snowflake/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m15:13:58.727446 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.03823821, "process_in_blocks": "0", "process_kernel_time": 0.098001, "process_mem_max_rss": "96124928", "process_out_blocks": "0", "process_user_time": 0.546218}
+[0m15:13:58.727624 [debug] [MainThread]: Command `dbt run` failed at 15:13:58.727581 after 0.04 seconds
+[0m15:13:58.727760 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105e934c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106f30fa0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106f30e50>]}
+[0m15:13:58.727896 [debug] [MainThread]: Flushing usage events
+[0m15:13:59.206294 [debug] [MainThread]: An error was encountered while trying to flush usage events
