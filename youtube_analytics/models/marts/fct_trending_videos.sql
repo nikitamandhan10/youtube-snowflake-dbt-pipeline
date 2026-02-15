@@ -1,6 +1,9 @@
 {{
     config(
-        materialized='table',
+        materialized='incremental',
+        unique_key=['video_id', 'country_code', 'trending_date'],
+        on_schema_change='fail',
+        cluster_by=['trending_date', 'country_code'],
         tags=['marts', 'fact']
     )
 }}
@@ -67,3 +70,7 @@ fact_table as (
 )
 
 select * from fact_table
+
+{% if is_incremental() %}
+    where trending_date > (select max(trending_date) from {{ this }})
+{% endif %}

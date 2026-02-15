@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: dim_channels_scd2
+    description: "Slowly Changing Dimension Type 2 for channels - tracks historical changes in channel performance tiers"
+    columns:
+      - name: channel_key
+        description: "Surrogate key for the channel (includes timestamp for versioning)"
+        tests:
+          - not_null
+      
+      - name: channel_title
+        description: "Channel name"
+        tests:
+          - not_null
+      
+      - name: channel_tier
+        description: "Performance tier classification"
+        tests:
+          - accepted_values:
+              values: ['Top Tier', 'High Performer', 'Mid Performer', 'Growing']
+      
+      - name: valid_from
+        description: "Start date for this version of the record"
+        tests:
+          - not_null
+      
+      - name: valid_to
+        description: "End date for this version (9999-12-31 for current records)"
+        tests:
+          - not_null
+      
+      - name: is_current
+        description: "Flag indicating if this is the current version"
+        tests:
+          - not_null
+
+  - name: fct_trending_videos
+    description: "Incremental fact table of trending videos with clustering"
+    meta:
+      clustering: ['trending_date', 'country_code']
+    columns:
+      - name: trending_video_key
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+      
+      - name: video_id
+        description: "YouTube video ID"
+        tests:
+          - not_null
+      
+      - name: trending_date
+        description: "Date the video was trending"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: date
+      
+      - name: views
+        description: "View count"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1000000000
+      
+      - name: engagement_rate
+        description: "Engagement rate metric"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 1
+              config:
+                severity: warn
+
+  - name: data_quality_metrics
+    description: "Data quality monitoring metrics"
+    columns:
+      - name: metric_date
+        description: "Date of the metric"
+        tests:
+          - not_null
+      
+      - name: total_records
+        description: "Total records processed"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
