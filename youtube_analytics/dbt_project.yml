@@ -19,7 +19,7 @@ models:
   youtube_analytics:
     # Disable example models
     example:
-      +enabled: false
+      +enabled: True
     
     # Staging models - materialized as views
     staging:
@@ -38,6 +38,16 @@ models:
       +materialized: table
       +schema: analytics
       +tags: ['marts']
+      fct_trending_videos:
+        +materialized: incremental
+        +unique_key: ['video_id', 'country_code', 'trending_date']
+        +cluster_by: ['trending_date', 'country_code']
+      dim_channels_scd2:
+        +materialized: incremental
+        +unique_key: channel_key
+      data_quality_metrics:
+        +materialized: incremental
+        +unique_key: metric_date
 
 vars:
   # Date ranges for incremental models
