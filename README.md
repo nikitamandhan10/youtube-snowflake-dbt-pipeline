@@ -33,7 +33,6 @@ youtube_analytics/
 - `mart_viral_analysis` - Viral video analysis
 
 ## Setup
-
 1. Configure dbt profile in `~/.dbt/profiles.yml`
 2. Install dependencies: `dbt deps`
 3. Run models: `dbt run`
