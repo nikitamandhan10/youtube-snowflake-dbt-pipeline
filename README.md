@@ -5,13 +5,17 @@ A dbt project for analyzing YouTube trending video data in Snowflake.
 ## Project Structure
 
 ```
-youtube_analytics/
-├── models/
-│   ├── staging/          # Raw data transformations
-│   ├── intermediate/     # Enriched video data
-│   └── marts/           # Analytics tables
-├── tests/               # Data quality tests
-└── dbt_project.yml
+youtube-snowflake-dbt-pipeline/
+├── youtube_analytics/    # dbt project (shown in README)
+│   ├── models/
+|   |   ├── staging/          # Raw data transformations
+│   |   ├── intermediate/     # Enriched video data
+│   |   └── marts/           # Analytics tables
+│   ├── tests/               # Data quality tests
+│   └── dbt_project.yml
+├── dags/                 # Airflow orchestration (not shown)
+│   └── youtube_analytics_dag.py
+└── README.md
 ```
 
 ## Models
