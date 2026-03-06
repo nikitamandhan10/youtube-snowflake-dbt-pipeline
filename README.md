@@ -44,7 +44,7 @@ youtube-snowflake-dbt-pipeline/
 
 ## Airflow Automation
 
-The pipeline can be automated using Airflow DAGS:
+The pipeline can be automated using Airflow:
 
 ```bash
 # Copy DAG to Airflow
