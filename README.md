@@ -6,7 +6,7 @@ A dbt project for analyzing YouTube trending video data in Snowflake.
 
 ```
 youtube-snowflake-dbt-pipeline/
-├── youtube_analytics/    # dbt project (shown in README)
+├── youtube_analytics/    # dbt project 
 │   ├── models/
 |   |   ├── staging/          # Raw data transformations
 │   |   ├── intermediate/     # Enriched video data
