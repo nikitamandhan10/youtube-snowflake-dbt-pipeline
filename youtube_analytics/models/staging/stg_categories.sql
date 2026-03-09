@@ -8,7 +8,8 @@ with source_data as (
     select * from {{ source('raw', 'raw_categories') }}
 ),
 
-flattened_categories as (
+flattened_categories as 
+    (
     select
         country_code,
         value:id::integer as category_id,
