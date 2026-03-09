@@ -9,8 +9,7 @@
 }}
 
 with enriched_videos as (
-    select * from {{ ref('int_videos_enriched') }}
-),
+    select * from {{ ref('int_videos_enriched') }}),
 
 fact_table as (
     select
@@ -67,7 +66,7 @@ fact_table as (
         current_timestamp() as dbt_updated_at
         
     from enriched_videos
-)
+    )
 
 select * from fact_table
 
