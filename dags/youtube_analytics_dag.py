@@ -5,7 +5,8 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.utils.trigger_rule import TriggerRule
 
-DBT_PROJECT_DIR = os.environ.get(
+DBT_PROJECT_DIR = os.environ.get
+(
     "DBT_PROJECT_DIR",
     "/opt/airflow/dbt/youtube_analytics"  # default fallback (update as needed)
 )
